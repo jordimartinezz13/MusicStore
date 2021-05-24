@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat de artistas{% endblock %}
+{% block body %}
+<style>
+.FotoLista{
+    width: 250px;
+    height: 250px;
+}
+.body {
+    padding:20px;
+}
+
+.link{
+    padding-left:50px;
+}
+
+h1{
+    /*text-decoration:underline;*/
+    font-size:3.5em;
+    padding-left:20px;
+}
+
+.form-filtro{
+    padding-left:50px;
+}
+#form_save{
+    transition-duration: 0.6s;
+}
+#form_save:hover {
+  
+  background-color: rgb(60, 60, 60);
+  color: white;
+}
+.tr_1{
+    transition-duration: 0.6s;
+}
+.tr_1:hover{
+    background-color: rgb(180, 180, 180);
+    color: white;
+}
+
+</style>
+<script src="{{asset('js/scriptConfirm.js')}}"></script>
+
+    <div class="body">
+        <h1>Llistat de artistas</h1>
+
+        {% if search is defined %}
+          <p>Resultats de cerca per: <strong>{{ id }}</strong></p>
+          <a class="link-primary link" href="{{ path('artista_list') }}">x Esborrar resultats</a>
+        
+            {% for message in app.flashes('notice') %}
+                  <strong>Success!</strong> {{ message }}
+            {% endfor %}
+
+
+            <table class="table table-hover" style="margin-top: 20px;margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                        <th><strong>#</strong></th><th>Nom</th><th>Cognoms</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if search == true %}
+                        <tr>
+                            <td>{{ artistas.id }}</td><td>{{ artistas.nombre }}</td><td>{{ artistas.apellidos }}</td>
+                            {% if app.user %}
+                            <td>
+                                <a class="link-primary" href="{{ path('artista_edit', {'id': artista.id}) }}">Editar</a>
+                                <a class="link-primary" href="{{ path('artista_delete', {'id': artista.id}) }}"
+                                onclick="return confirmar();">Eliminar</a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No hi ha artistas.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+        {% else %}
+            
+
+            {% if app.user %}
+                <a class="link-primary link" href="{{ path('artista_new') }}">Crear Artista</a>
+            {% endif %}
+
+            {% if error is defined %}
+                <br><br>
+                <p style='color:red;'><strong>ERROR: </strong>{{ error }}</p>
+                
+            {% endif %}
+            <table class="table table-hover" style="margin-top: 20px;margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                        <th><strong>#</strong></th><th>Nom</th><th>Cognoms</th>
+                        {% if app.user %}
+                            <th>Editar</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for artista in artistas %}
+                        <tr>
+                            <td>{{ artista.id }}</td><td>{{ artista.nombre }}</td><td>{{ artista.apellidos }}</td>
+                            {% if app.user %}
+                            <td>
+                                <a class="link-primary" href="{{ path('artista_edit', {'id': artista.id}) }}">Editar</a>
+                                <a class="link-primary" href="{{ path('artista_delete', {'id': artista.id}) }}"
+                                onclick="return confirmar();">Eliminar</a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No hi ha artistas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+            <br>
+</div>
+            
+
+
+{% endblock %}

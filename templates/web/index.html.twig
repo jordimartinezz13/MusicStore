@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CD Store!{% endblock %}
+
+{% block body %}
+
+<style>
+.centrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.justify{
+    text-align:justify;
+}
+
+</style>
+
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="4000">
+      <img src="../../src/img/web/1.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="../../src/img/web/2.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="4000">
+      <img src="../../src/img/web/4.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <!--span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span-->
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <!--span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span-->
+  </button>
+</div>
+
+<br>
+<br>
+
+<div class="container marketing">
+    <!-- justify-content-center align-items-center -->
+    <div class="row">
+      <div class="col-lg-4 ">
+      <div class="centrar">
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../../src/img/web/d1.png" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Vinilo</title>
+        </img>
+      </div>
+        <br>
+        <h2 style="text-align:center;">Vinilos</h2>
+        
+        <p class="justify">¿Te consideras un sibarita de la música?En ese caso seguro que cuentas con varios 
+        <b>discos de vinilo</b> para disfrutar del sonido de siempre en un momento de relax y, a ser posible, en buena compañía.</p>
+        <p class="centrar"><a class="btn btn-secondary" href="https://es.wikipedia.org/wiki/Disco_de_vinilo">Ver más detalles &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+
+      <div class="col-lg-4">
+      <div class="centrar">
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../../src/img/web/d2.png" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>CD</title>
+        </img>
+      </div>
+        <br>
+        <h2 style="text-align:center;">CD's</h2>
+        <p class="justify">El disco compacto goza de popularidad en el mundo actual, especialmente en Asia, 
+        donde su éxito persiste. ​En el año 2007 se habían vendido 200 mil millones de CD en el mundo desde su creación.</p>
+        <p class="centrar"><a class="btn btn-secondary" href="https://es.wikipedia.org/wiki/Disco_compacto">Ver más detalles &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+      <div class="centrar">
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../../src/img/web/d3.png" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Digital</title>
+        </img>
+      </div>
+        <br>
+        <h2 style="text-align:center;">Digital</h2>
+        <p class="justify">La distribución digital de contenido multimedia a través de una red de ordenadores 
+        o dispositivos compatibles, de manera que el usuario que utiliza el producto a la vez lo puede descargar.</p>
+        <p class="centrar"><a class="btn btn-secondary" href="https://www.ivoox.com/">Ver más detalles &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+    <br>
+
+    <hr class="featurette-divider">
+    <br>
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Tu música en cualquier parte.
+        <br>
+        <span class="text-muted">Tu pasión es el límite.</span></h2>
+        <br>
+        <p class="lead justify">Apasionados de la música, melómanos, fanáticos y coleccionistas 
+        ¡sois bienvenidos en <b>CD Store!</b>. Si te gusta la música clásica, española, rap, música electrónica, 
+        jazz o pop rock, podrás encontrar aquí tu música preferida en CD o vinilo. Crea tu propia discografía 
+        con los últimos lanzamientos, ediciones especiales, discos firmados y vinilos exclusivos que tenemos 
+        para tí. Además si tienes alguna duda, puedes consultar con nuestros expertos en música.
+        <br>
+        Revive la emoción de las canciones que te hacen vibrar desde The Beatles o David Bowie a los 
+        nuevos sonidos de los festivales de este año. Apréndete las letras mientras esperas 
+        a tu banda preferida en su próximo concierto.</p>
+      </div>
+      <div class="col-md-5">
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="../../src/img/web/Arcade-Fire.png" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+        </img>
+
+      </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<style>
+.FotoLista{
+    width: 250px;
+    height: 250px;
+}
+.body {
+    padding:20px;
+}
+
+.link{
+    padding-left:50px;
+}
+
+h1{
+    /*text-decoration:underline;*/
+    font-size:3.5em;
+    padding-left:20px;
+}
+
+.button1{
+    border: 2px solid #555555;
+    transition-duration: 0.6s;
+}
+.button1:hover{
+    background-color:#555555;
+    color: white;
+    box-shadow: 0px 0px 29px 0px rgba(0,0,0,0.75);
+}
+</style>
+
+<script src="{{ asset('js/scriptPW.js') }}"></script>
+
+<form class="body" method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Ya estás registrado como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Salir</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Por favor, ingrese su usuario</h1>
+    <label class="form-label" for="inputUsername">Username</label>
+    <input class="form-control" type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+    <label class="form-label" for="inputPassword">Password</label>
+    <input class="form-control" type="password" name="password" id="inputPassword" class="form-control" required>
+    <label><input id="ShowPassword" type="checkbox" /> Mostrar contraseña</label>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+    <button class="btn btn-lg button1" type="submit">
+        Ingresar
+    </button>
+   
+    <a class="link" href="registrar"><input class="btn btn-lg button1" type="button" value="Registrarse" />
+</a>
+</form>
+{% endblock %}

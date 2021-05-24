@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat de discos{% endblock %}
+{% block body %}
+<style>
+.FotoLista{
+    width: 250px;
+    height: 250px;
+}
+.body {
+    padding:20px;
+}
+
+.link{
+    padding-left:50px;
+}
+
+h1{
+    /*text-decoration:underline;*/
+    font-size:3.5em;
+    padding-left:20px;
+}
+
+.form-filtro{
+    padding-left:50px;
+}
+#form_save{
+    transition-duration: 0.6s;
+}
+#form_save:hover {
+  
+  background-color: rgb(60, 60, 60);
+  color: white;
+}
+.tr_1{
+    transition-duration: 0.6s;
+}
+.tr_1:hover{
+    background-color: rgb(180, 180, 180);
+    color: white;
+}
+
+</style>
+<script src="{{asset('js/scriptConfirm.js')}}"></script>
+    <div class="body">
+        <h1>Llistat de discos</h1>
+
+        {% if search is defined %}
+          <p class="form-filtro">Resultats de cerca per: <strong>{{ id }}</strong></p>
+          <a class="link-primary link" href="{{ path('disco_list') }}">Esborrar resultats</a>
+
+            {% for message in app.flashes('notice') %}
+                  {{ message }}
+            {% endfor %}
+            
+
+            <table class="table table-hover" style="margin-top: 20px;margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                        <th>Imatge</th><th>Nom</th><th>Preu</th><th>Artista</th>
+                        {% if app.user %}
+                            <th>Editar</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for disco in discos %}
+                        <tr class="tr_1">
+                            <td>
+                            <a class="" href="{{ path('disco_ver', {'id': disco.id}) }}">
+                            {% if disco.imagen != null and disco.imagen != "" %}
+                                <img class="FotoLista" src="{{ asset('img/subidas/' ~ disco.imagen) }}" alt="No hay imagen disponible"/>
+                                
+                            {% else %}
+                                No hay imagen disponible.
+                            {% endif %}
+                            </a>
+                            </td>
+                            <td>{{ disco.nombre }}</td><td>{{ disco.precio }}</td>
+                            <td>{{ disco.artista.nombre }} {{ disco.artista.apellidos }}</td>
+                            <td>
+                            {% if app.user %}
+                                <a class="link-primary" href="{{ path('disco_edit', {'id': disco.id}) }}">Editar</a>
+                                <a class="link-primary" href="{{ path('disco_delete', {'id': disco.id}) }}"
+                                onclick="return confirmar();">Eliminar</a>
+                            {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No hi ha cap disc.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        {% else %}
+
+            <div class="form-filtro">
+                <form name="form" method="post" action="{{ path('disco_search') }}">
+                    <label for="seleForm">
+                        <em style="margin-right:5px;"><strong>Filtrar per artista: </strong></em>
+                    </label>
+                    <select id="seleForm" name="seleForm">
+                        <option value="0">Tots els artistes</option>
+                        {% for artista in artistas %}
+                        <option value="{{ artista.id }}">{{ artista.nombre }} {{ artista.apellidos }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" id="form_save" name="save" style="margin-left:5px;border-radius: 15px;">Filtra</button>
+                </form>
+            </div>
+
+            {% if app.user %}
+                <a class="link-primary link" href="{{ path('disco_new') }}">Crear Disco</a>
+            {% endif %}
+
+            <table class="table table-hover" style="margin-top: 20px;margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                        <th>Imatge</th><th>Nom</th><th>Preu</th><th>Artista</th>
+                        {% if app.user %}
+                            <th>Editar</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for disco in discos %}
+                    
+                        <tr class="tr_1">
+                        
+                            <td>
+                            <a class="" href="{{ path('disco_ver', {'id': disco.id}) }}">
+                            {% if disco.imagen != null and disco.imagen != "" %}
+                                <img class="FotoLista" src="{{ asset('img/subidas/' ~ disco.imagen) }}" alt="No hay imagen disponible"/>
+                                
+                            {% else %}
+                                No hay imagen disponible.
+                            {% endif %}
+                            </a>
+                            </td>
+                            <td>{{ disco.nombre }}</td><td>{{ disco.precio }} €</td>
+                            <td>{{ disco.artista.nombre }} {{ disco.artista.apellidos }}</td>
+                        
+                            <td>
+                            {% if app.user %}
+                                <a class="link-primary" href="{{ path('disco_edit', {'id': disco.id}) }}">Editar</a>
+                                <a class="link-primary" href="{{ path('disco_delete', {'id': disco.id}) }}"
+                                onclick="return confirmar();">Eliminar</a>
+                            {% endif %}
+                            </td>
+                            
+                        </tr>
+                        
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No hi ha artistas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+            <br>
+
+            
+</div>
+
+{% endblock %}

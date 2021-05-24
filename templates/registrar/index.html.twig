@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro CD Store!{% endblock %}
+
+{% block body %}
+<style>
+.FotoLista{
+    width: 250px;
+    height: 250px;
+}
+.body {
+    padding:20px;
+}
+
+.link{
+    padding-left:50px;
+}
+
+h1{
+    /*text-decoration:underline;*/
+    font-size:3.5em;
+    padding-left:20px;
+}
+label{
+	margin-right: 15px;
+}
+input{
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+button{
+	margin: 20px;
+	padding:10px;
+	font-size:1.2em;
+    border: 2px solid #555555;
+	border-radius: 5px;
+    transition-duration: 0.6s;
+}
+button:hover{
+    background-color:#555555;
+    color: white;
+    box-shadow: 0px 0px 29px 0px rgba(0,0,0,0.75);
+}
+
+</style>
+<div class="body">
+    <h1>Formulario de registro</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.password) }}
+        <button type="submit">Register!</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

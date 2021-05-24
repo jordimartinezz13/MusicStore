@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat de artistas{% endblock %}
+{% block body %}
+<style>
+.FotoLista{
+    width: 250px;
+    height: 250px;
+}
+</style>
+
+        <h1>Llistat de artistas</h1>
+
+        {% if search is defined %}
+          <p>Resultats de cerca per: <strong>{{ id }}</strong></p>
+          <a href="{{ path('artista_list') }}">x Esborrar resultats</a>
+
+            {% for message in app.flashes('notice') %}
+                  <strong>Success!</strong> {{ message }}
+            {% endfor %}
+            
+
+            <table style="margin-top: 20px;margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                        <th>Imatge</th><th>id</th><th>Nom</th><th>Preu</th><th>Artista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if search == true %}
+                        <tr>
+                            <td>
+                                {% if disco.imagen != null and disco.imagen != "" %}
+                                    <img class="FotoLista" src="{{ asset('img/subidas/' ~ disco.imagen) }}" alt="No hay imagen disponible"/>
+                                    
+                                {% else %}
+                                    No hay imagen disponible.
+                                {% endif %}
+                            </td>
+                            <td>{{ discos.id }}</td><td>{{ discos.nombre }}</td><td>{{ discos.precio }}</td>
+                            <td>{{ discos.artista.nombre }} {{ discos.artista.apellidos }}</td>
+                            <!--a href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">View brochure (PDF)</a-->
+                            {% if app.user %}
+                                <a class="link" href="{{ path('disco_edit', {'id': disco.id}) }}">Editar</a>
+                                <a class="link" href="{{ path('disco_delete', {'id': disco.id}) }}">Eliminar</a>
+                            {% endif %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Disc no trobat.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+
+        {% else %}
+
+            {% if app.user %}
+                <a class="link" href="{{ path('disco_new') }}">Crear Disco</a>
+            {% endif %}
+
+            <table style="margin-top: 20px;margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                        <th>Imatge</th><th>Nom</th><th>Preu</th><th>id</th><th>Artista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for disco in discos %}
+                        <tr>
+                            <td>
+                            {% if disco.imagen != null and disco.imagen != "" %}
+                                <img class="FotoLista" src="{{ asset('img/subidas/' ~ disco.imagen) }}" alt="No hay imagen disponible"/>
+                                
+                            {% else %}
+                                No hay imagen disponible.
+                            {% endif %}
+                            </td>
+                            <td>{{ disco.id }}</td><td>{{ disco.nombre }}</td><td>{{ disco.precio }}</td>
+                            <td>{{ disco.artista.nombre }} {{ disco.artista.apellidos }}</td>
+                            <td>
+                            {% if app.user %}
+                                <a class="link" href="{{ path('disco_edit', {'id': disco.id}) }}">Editar</a>
+                                <a class="link" href="{{ path('disco_delete', {'id': disco.id}) }}">Eliminar</a>
+                            {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No hi ha artistas.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+            <br>
+
+            
+
+
+{% endblock %}
